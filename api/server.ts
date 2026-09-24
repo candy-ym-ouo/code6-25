@@ -1,16 +1,18 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import { randomUUID } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { actors, actions, plays, towns, type Actor } from './content.js';
+import { loadLatest, writeSave } from './persistence.js';
 
 type Draft = { playId:string; assignments:Record<string,'main'|'support'|'rehearse'|'rest'>; timeline:{actionId:string; actorIds:string[]; act:number; slot:number}[]; endings:number[] };
 type Tour = { id:string; name:string; seed:number; status:string; townIds:string[]; stopIndex:number; funds:number; reputation:number; inspiration:number; version:number; actors:(Actor & {level:number;xp:number;stamina:number;fatigue:number})[]; visited:string[]; clues:Record<string,string[]>; draft?:Draft; history:any[]; unlocked:string[] };
 const file = join(process.cwd(), 'data.json');
-let tours:Tour[] = existsSync(file) ? JSON.parse(readFileSync(file,'utf8')) : [];
+const loaded = loadLatest<Tour[]>(file, []);
+let tours:Tour[] = loaded.data;
+let generation = loaded.generation;
 const performanceKeys=new Map<string,any>();
-let persistTimer:ReturnType<typeof setTimeout>|undefined; const persist=()=>{if(persistTimer)clearTimeout(persistTimer);persistTimer=setTimeout(()=>writeFileSync(file,JSON.stringify(tours,null,2)),120)};
+const persist=()=>{generation=writeSave(file,tours,generation+1).generation};
 const app=express(); app.use(cors()); app.use(express.json({limit:'1mb'}));
 const ok=(res:any,data:any)=>res.json(data); const fail=(res:any,code:string,message:string,status=400)=>res.status(status).json({code,message});
 const getTour=(req:Request,res:Response):Tour|null=>{const t=tours.find(x=>x.id===req.params.id);if(!t){fail(res,'TOUR_NOT_FOUND','存档不存在',404);return null}return t};

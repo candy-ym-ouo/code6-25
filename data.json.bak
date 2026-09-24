@@ -1,0 +1,74 @@
+{
+  "generation": 1,
+  "checksum": "cef41907a2398baf7b9401a4f8180dbf0bc810652e294b045cdfeec5d53eee37",
+  "savedAt": "2026-09-24T06:38:26.533Z",
+  "data": [
+    {
+      "id": "db7c610b-c9ba-47eb-861a-7d543333debb",
+      "name": "录制剧团",
+      "seed": 42,
+      "status": "INVESTIGATING",
+      "townIds": [
+        "lantern",
+        "red",
+        "moss",
+        "bell",
+        "paper",
+        "well"
+      ],
+      "stopIndex": 0,
+      "funds": 420,
+      "reputation": 50,
+      "inspiration": 3,
+      "version": 1,
+      "actors": [
+        {
+          "id": "mei",
+          "name": "梅枝",
+          "role": "牵线师",
+          "precision": 8,
+          "acting": 6,
+          "improvisation": 5,
+          "stamina": 78,
+          "trait": "耐力好",
+          "bio": "能把最细小的情绪传给最后一排。",
+          "level": 1,
+          "xp": 0,
+          "fatigue": 0
+        },
+        {
+          "id": "luo",
+          "name": "罗盘",
+          "role": "即兴演员",
+          "precision": 5,
+          "acting": 7,
+          "improvisation": 9,
+          "stamina": 72,
+          "trait": "现 场救场",
+          "bio": "总能在木偶摔倒时把它变成剧情。",
+          "level": 1,
+          "xp": 0,
+          "fatigue": 0
+        },
+        {
+          "id": "yan",
+          "name": "燕尾",
+          "role": "武生",
+          "precision": 7,
+          "acting": 8,
+          "improvisation": 4,
+          "stamina": 64,
+          "trait": "擅长英雄",
+          "bio": "动作利落，最怕没有掌声。",
+          "level": 1,
+          "xp": 0,
+          "fatigue": 0
+        }
+      ],
+      "visited": [],
+      "clues": {},
+      "history": [],
+      "unlocked": []
+    }
+  ]
+}
